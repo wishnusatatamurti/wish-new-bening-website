@@ -1,42 +1,64 @@
 "use strict";
+/* Wish New Bening global language + appearance preferences. */
 (() => {
-  const key = "wnb_language_v1";
-  const saved = () => { try { return localStorage.getItem(key); } catch { return null; } };
-  const store = language => { try { localStorage.setItem(key, language); } catch {} };
-  const page = document.body;
-  const language = document.documentElement.lang === "id" ? "id" : "en";
-  const isRootLanding = page.hasAttribute("data-language-welcome");
-  const legalFile = /(?:\/|^)(privacy|terms)\.html$/.exec(window.location.pathname)?.[1] || "";
-
-  document.querySelectorAll(".language-switch a, [data-select-language]").forEach(link => {
-    const next = link.getAttribute("hreflang") || link.getAttribute("data-select-language");
-    if (next !== "en" && next !== "id") return;
-    if (legalFile) link.href = link.href.replace(/\/(?:en|id)\/?$/, `/${next}/${legalFile}.html`);
-    link.addEventListener("click", () => {
-      store(next);
-      if (!legalFile && window.location.hash) {
-        const url = new URL(link.href);
-        url.hash = window.location.hash;
-        link.href = url.href;
-      }
-    });
+  const langKey = "wnb_language_v1";
+  const themeKey = "wnb_theme_v1";
+  const allowed = ["en","id","es","fr","de","pt","it","ru","ar","hi","zh","ja","ko","th","vi","ms"];
+  const pageLang = document.documentElement.lang || "en";
+  const storage = {
+    get: key => { try { return localStorage.getItem(key); } catch { return null; } },
+    set: (key,val) => { try { localStorage.setItem(key,val); } catch {} }
+  };
+  const isLegal = /\/(privacy|terms)\.html$/i.exec(location.pathname);
+  function destination(code){
+    if(!allowed.includes(code))code="en";
+    const hash = isLegal ? "" : (location.hash || "");
+    const suffix = isLegal && (code==="en"||code==="id") ? isLegal[1]+".html" : "";
+    return new URL("/"+code+"/"+suffix+hash,location.origin).href;
+  }
+  function setLang(code){
+    if(!allowed.includes(code))return;
+    storage.set(langKey,code);
+    location.assign(destination(code));
+  }
+  const select = document.getElementById("languagePicker");
+  if(select){
+    select.value=allowed.includes(pageLang)?pageLang:"en";
+    select.addEventListener("change",()=>setLang(select.value));
+  }
+  const button = document.getElementById("themeToggle");
+  function updateThemeButton(){
+    if(!button)return;
+    const dark = document.documentElement.dataset.theme==="dark";
+    button.textContent=dark?"☀":"☾";
+    button.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
+    button.setAttribute("title",dark?"Light mode":"Dark mode");
+    button.setAttribute("aria-pressed",String(dark));
+  }
+  updateThemeButton();
+  if(button) button.addEventListener("click",()=>{
+    const next=document.documentElement.dataset.theme==="dark"?"light":"dark";
+    document.documentElement.dataset.theme=next;
+    storage.set(themeKey,next);
+    updateThemeButton();
   });
-
-  if (isRootLanding) {
-    const choice = saved();
-    if (choice === "en" || choice === "id") {
-      window.location.replace(`${choice}/${window.location.hash || ""}`);
+  if(document.body.hasAttribute("data-language-welcome")){
+    const saved = storage.get(langKey);
+    if(saved && allowed.includes(saved)){
+      location.replace(destination(saved));
       return;
     }
-    const dialog = document.getElementById("languageWelcome");
-    const english = () => {
-      store("en");
-      dialog.close();
-      window.location.assign(`en/${window.location.hash || ""}`);
-    };
-    document.getElementById("languageDismiss")?.addEventListener("click", english);
-    dialog.addEventListener("cancel", event => { event.preventDefault(); english(); });
-    if (typeof dialog.showModal === "function") dialog.showModal();
-    else dialog.setAttribute("open", "");
+    const popup = document.getElementById("languageWelcome");
+    const picker = document.getElementById("welcomeLanguage");
+    const proceed = document.getElementById("languageDismiss");
+    if(!popup || !picker || !proceed)return;
+    const browserLangs = navigator.languages || [navigator.language || "en"];
+    const suggestion=browserLangs.map(v=>String(v).split("-")[0].toLowerCase()).find(v=>allowed.includes(v)) || "en";
+    picker.value = suggestion;
+    proceed.addEventListener("click",()=>setLang(picker.value));
+    picker.addEventListener("keydown",e=>{if(e.key==="Enter")setLang(picker.value)});
+    popup.addEventListener("cancel", e=>{e.preventDefault();setLang(picker.value)});
+    if(typeof popup.showModal==="function") popup.showModal();
+    else popup.setAttribute("open","");
   }
 })();
