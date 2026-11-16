@@ -1,61 +1,68 @@
-# Wish New Bening — Official Website (Initial Prototype)
+# Wish New Bening — International Website v1.1
 
 **Brand:** Muzike Indonesia  
-**Tagline:** Clear Mind • Calm Breath • Better Day  
-**Stack:** HTML + CSS + vanilla JavaScript. No build pipeline, external fonts, analytics, or paid dependencies.
+**Official domain:** https://wishnewbening.com  
+**Languages:** English (`/en/`) and Bahasa Indonesia (`/id/`)  
+**Tagline:** Clear Mind • Calm Breath • Better Day
 
-## What's inside
+## What's new in v1.1
 
-- `index.html`: responsive website with hero, 8 guided practices, interactive Breath Studio, 4 wellness themes, soundscape previews, progress, journal articles, About, app availability, footer.
-- `styles.css`: responsive premium wellness style using the official brand palette.
-- `app.js`: breathing engine, start/pause/resume/end, 8 preset patterns, custom patterns, session recording, current-week progress, local history, article dialogs.
-- `privacy.html` and `terms.html`: **drafts for review** before public deployment.
-- `assets/brandmark.svg` and `assets/favicon.svg`: original placeholder brandmark for the website. Replace with your definitive Wish New Bening logo if available.
+- First-visit bilingual language chooser at the domain root.
+- Always-visible EN / ID switcher in the header on desktop and mobile.
+- `/en/` and `/id/` each provide real localized static HTML, metadata, `canonical` and `hreflang` links, for discoverability without JavaScript.
+- Translations for all sections, legal drafts, three journal articles, and interactive Breath Studio (including phase guidance, custom patterns, messages, dates and progress labels).
+- Language choice is stored under `localStorage['wnb_language_v1']` and restored when visiting the domain root.
+- Existing custom patterns and completed browser sessions remain under the same keys as v1.0; language switching does **not** reset them.
+- XML sitemap and robots.txt for English/Indonesian pages.
 
-## Preview locally
+## File layout
 
-Open `index.html` in Chrome or Edge. For a more representative local preview:
+- `index.html` — first-visit EN/ID chooser, with English accessible for crawlers.
+- `en/index.html`, `id/index.html` — English and Indonesian homepage.
+- `en/privacy.html`, `id/privacy.html` — localized privacy policy draft.
+- `en/terms.html`, `id/terms.html` — localized terms draft.
+- `app.js` — unchanged breathing mechanics, with translated dynamic UI.
+- `language.js`, `language.css` — language preference and responsive switcher / welcome modal.
+- `styles.css`, `assets/` — base styles and icons.
+- `CNAME` — preserves the GitHub Pages custom domain `wishnewbening.com`.
+- `robots.txt`, `sitemap.xml` — crawler discovery.
+- Original `privacy.html` and `terms.html` remain as English legacy URLs for older links. New navigation routes to per-language legal pages.
+
+## Update the existing GitHub Pages site
+
+Repository: `wishnusatatamurti/wish-new-bening-website`. Current GitHub Pages: Deploy from `main`, root folder. **Do not create a new repository**.
+
+1. Download ZIP, extract it on your computer. **Do not upload the ZIP itself.**
+2. Open the existing repository at https://github.com/wishnusatatamurti/wish-new-bening-website
+3. Select `Add file` → `Upload files`.
+4. Drag **the contents** of this extracted folder (all root files and both the `en/` and `id/` directories) to the upload page. If folder drag/drop fails, use GitHub Desktop or a local Git push to preserve directories. Existing files may be replaced intentionally.
+5. Review the list of changes and click `Commit changes` on `main`.
+6. Confirm GitHub Pages deploy is successful under Actions/Settings → Pages. Check https://wishnewbening.com/ and `/en/`, `/id/`.
+7. Check the domain is still configured and **Enforce HTTPS** remains enabled. Keep the `CNAME` file.
+
+## Important privacy and safety notes
+
+- Web session history remains **local to the browser**, not synchronized with Android SQLite.
+- LocalStorage keys: `wnb_custom_patterns_v1`, `wnb_web_sessions_v1`, `wnb_language_v1`.
+- Website is for **general wellness and relaxation**, not medical diagnosis or treatment.
+- Soundscapes, Android public download, cloud sync, subscription and real contacts are **not yet live**.
+- Legal pages are **drafts**; obtain appropriate review, a verified contact channel, and finalized dates before treating them as production policies.
+- Brand icons remain temporary original assets pending definitive app assets.
+
+## Test locally
+
+Serve the extracted root directory (not the `en` or `id` subfolder):
 
 ```bash
-cd wish-new-bening-website
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Then browse to `http://localhost:8000/`, `http://localhost:8000/en/`, or `http://localhost:8000/id/`.
 
-## Publishing to GitHub Pages
+## SEO
 
-1. Create a **new repository** for the website or use a repository designated for Wish New Bening.
-2. Upload all files and the `assets` directory to the **repository root**. Keep relative paths unchanged.
-3. In GitHub, go to **Settings → Pages → Build and deployment → Deploy from a branch**, and choose `main` / `/ (root)`.
-4. Open the Pages URL GitHub provides. Connect a custom domain only after its ownership and DNS settings are ready.
-5. Replace the temporary logo, approve policy drafts, and provide an official contact method before public launch.
-
-The website does not need Vercel, Firebase, npm, a paid server, or an API key.
-
-## Data behavior
-
-- Website custom patterns stored under `localStorage['wnb_custom_patterns_v1']`.
-- Completed website sessions stored under `localStorage['wnb_web_sessions_v1']`, capped at 300 sessions.
-- Progress is calculated from website browser data. **It does NOT sync with Android SQLite**, and should not be presented as the Android app's progress.
-- Custom breathing holds may be set to 0, with a range of 0–20 seconds; inhale and exhale are 1–20 seconds; exercise duration is 1–60 minutes.
-- The weekly chart runs **Monday through Sunday** in local browser time.
-- No session is counted until the full selected duration completes.
-
-## Not yet implemented
-
-- Real Rain/Ocean/Nature/Fireplace audio playback (audio cards are labeled *Coming soon*).
-- Official APK / Google Play download link (no public link has been provided).
-- An actual contact email/form backend (contact placeholders must be replaced).
-- Indonesian translation and language selector (recommended next phase).
-- Account / cloud sync, subscriptions, premium features.
-- Official app screenshots and final logo assets.
-
-## Development notes / quality checks
-
-- Mobile-friendly down to 360px.
-- `prefers-reduced-motion` is respected for decorative animations and automatic scroll.
-- In-browser breathing animation derives position from elapsed time (rather than per-second timer drift).
-- Browser-local storage can be disabled or cleared; users should not assume cross-device persistence.
-- Informational wellness content avoids diagnosis, treatment, cure, and sleep-speed guarantees.
-- This is a ready-to-preview static prototype, not a representation of a public production app release.
+- English canonical: `https://wishnewbening.com/en/`
+- Indonesian canonical: `https://wishnewbening.com/id/`
+- Root `/`: English fallback + first-visit language chooser, `x-default` hreflang.
+- Legal pages have localized canonical/hreflang.
+- `https://wishnewbening.com/sitemap.xml` is included.

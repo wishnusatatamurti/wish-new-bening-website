@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://wishnewbening.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wishnewbening.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://wishnewbening.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wishnewbening.com/"/>
+  </url>
+  <url>
+    <loc>https://wishnewbening.com/id/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wishnewbening.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://wishnewbening.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wishnewbening.com/"/>
+  </url>
+  <url>
+    <loc>https://wishnewbening.com/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wishnewbening.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://wishnewbening.com/id/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://wishnewbening.com/id/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wishnewbening.com/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://wishnewbening.com/id/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://wishnewbening.com/en/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wishnewbening.com/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://wishnewbening.com/id/terms.html"/>
+  </url>
+  <url>
+    <loc>https://wishnewbening.com/id/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wishnewbening.com/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://wishnewbening.com/id/terms.html"/>
+  </url>
+</urlset>

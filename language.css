@@ -1,0 +1,27 @@
+/* Wish New Bening v1.1 — accessible language navigation */
+.nav-shell { gap:clamp(12px,1.6vw,22px) }
+.nav-links {gap:clamp(11px,1.75vw,27px);margin-left:auto}
+.language-switch {display:flex;align-items:center;gap:3px;flex:none;border:1px solid #d7e7de;background:#fff;border-radius:100px;padding:4px;box-shadow:0 6px 24px rgba(30,83,66,.055)}
+.language-switch a {font-size:11px;letter-spacing:.05em;font-weight:780;min-width:34px;text-align:center;padding:9px 6px;border-radius:99px;color:#527769;line-height:1}
+.language-switch a.is-selected {background:#2f7d6d;color:white}
+.language-switch a:hover,.language-switch a:focus-visible {outline-offset:2px;background:#eaf4f0;color:#173f36}
+.language-switch a.is-selected:hover,.language-switch a.is-selected:focus-visible {background:#246958;color:white}
+@media(max-width:1100px){.nav-links{gap:12px}.nav-shell{gap:12px}.nav-links>a{font-size:11px}.language-switch{margin-left:0}}
+@media(max-width:830px){.language-switch{margin-left:auto}.nav-links{margin-left:0}.nav-shell{min-height:76px}}
+@media(max-width:410px){.brand-wordmark{font-size:15px}.brand-wordmark small{font-size:7px}.brand img{width:36px;height:36px}.language-switch a{min-width:30px;padding:8px 5px}}
+.language-welcome{max-width:min(490px,calc(100vw - 28px));width:100%;padding:0;border:1px solid #dbeae2;border-radius:28px;box-shadow:0 40px 150px rgba(7,49,38,.22);color:#173f36;overflow:hidden}
+.language-welcome::backdrop{background:rgba(9,41,34,.44);backdrop-filter:blur(9px)}
+.welcome-panel{padding:38px 34px 28px;text-align:center;background:linear-gradient(143deg,#fff 10%,#eff8f2 90%)}
+.welcome-symbol{font-size:35px;color:#2f7d6d;display:grid;place-items:center;background:#e0f0e9;width:66px;height:66px;border-radius:23px;margin:0 auto 17px}
+.welcome-overline{letter-spacing:.22em;font-size:10px;font-weight:800;color:#598579;margin-bottom:10px}
+.welcome-panel h2{font-size:clamp(27px,4vw,37px);letter-spacing:-.05em;margin:0 0 10px;line-height:1.15}
+.welcome-panel p:not(.welcome-overline){font-size:14px;color:#5e7b70;margin-bottom:23px;line-height:1.6}
+.welcome-options{display:grid;gap:11px;text-align:left}
+.welcome-options a{display:flex;align-items:center;gap:14px;padding:16px 18px;background:white;border:1px solid #dcece3;border-radius:16px;box-shadow:0 8px 24px #2b68500d}
+.welcome-options a>span:first-child{font-size:25px}.welcome-options a>span:nth-child(2){display:grid;gap:2px;flex:1}
+.welcome-options strong{font-size:15px}.welcome-options small{font-size:11px;color:#648578}
+.welcome-options a>span:last-child{font-size:15px;color:#2f7d6d}.welcome-options a:hover,.welcome-options a:focus-visible{border-color:#6cb39c;outline-offset:2px;background:#f8fdf9}
+.welcome-dismiss{border:none;background:transparent;font-size:12px;color:#2f7d6d;font-weight:700;text-decoration:underline;margin:20px 0 12px;padding:8px}
+.welcome-panel>small{display:block;color:#7a958a;font-size:10px}
+@media(max-width:560px){.welcome-panel{padding:32px 20px 24px}}
+@media(max-width:410px){.nav-shell{gap:5px}.brand{gap:6px}.brand-wordmark{font-size:13px;white-space:nowrap}.brand-wordmark small{display:none}.brand img{width:33px;height:33px}.menu-toggle{padding:6px}.language-switch{padding:3px;gap:0}.language-switch a{min-width:27px;padding:7px 4px}}
