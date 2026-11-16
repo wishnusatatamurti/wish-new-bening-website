@@ -104,3 +104,22 @@ html[data-theme="dark"] .about-art{background:linear-gradient(130deg,#12365B,#25
 @media(max-width:830px){.site-controls{margin-left:auto}.locale-control select{max-width:130px}.nav-links.is-open{z-index:20}}
 @media(max-width:560px){.site-controls{gap:6px}.theme-toggle{width:36px;height:36px;font-size:16px}.locale-control{padding:0 7px;min-height:36px}.locale-control select{max-width:80px;min-width:74px;font-size:11px}.locale-control .locale-icon{font-size:13px}.nav-shell{gap:7px!important}.brand-wordmark small{font-size:6px}.locale-beta-note{line-height:1.7}}
 @media(prefers-reduced-motion:reduce){body{transition:none}}
+
+/* Final contrast and responsive refinements */
+.nav-links .nav-download,.btn-primary{background:linear-gradient(118deg,#1A75D1 0%,#0056CA 58%,#063C93 100%);color:#fff}
+.hero{background:radial-gradient(ellipse at 74% 38%,rgba(243,251,255,.5) 0%,transparent 40%),linear-gradient(110deg,#FAFDFF 0%,#E0F4FF 40%,#83C8E4 70%,#0056CA 100%)}
+.hero-visual{backdrop-filter:blur(8px)}
+html[data-theme="dark"] .hero{background:radial-gradient(ellipse at 75% 42%,rgba(51,138,238,.27),transparent 42%),linear-gradient(110deg,#06152C 0%,#092C5E 62%,#0056CA 100%)}
+html[data-theme="dark"] .hero h1 em,html[data-theme="dark"] .section-kicker,html[data-theme="dark"] .tiny-label,html[data-theme="dark"] .hero-visual-bottom strong,html[data-theme="dark"] .intro h2 em,html[data-theme="dark"] .progress-grid h2 em,html[data-theme="dark"] .modalities-heading h2 em{color:#83C8E4}
+.symbol-rings{border-color:#4B9DE3;box-shadow:0 0 0 25px rgba(63,153,223,.13),0 0 0 51px rgba(63,153,223,.07)}
+.symbol-focus{background:radial-gradient(circle at 50% 50%,#0056CA 0 12%,transparent 13% 37%,#83C8E4 38% 40%,transparent 41% 65%,#ADCFEF 66% 68%,transparent 69%)}
+.symbol-moon,.symbol-reset{color:#307EC4}
+html[data-theme="dark"] .symbol-moon,html[data-theme="dark"] .symbol-reset{color:#8DCBFF}
+@media(max-width:1180px){
+ .menu-toggle{display:block!important;flex:none}
+ .nav-links{display:none!important;position:absolute;top:88px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0!important;padding:20px 24px;background:#F7FBFF;box-shadow:0 18px 34px rgba(5,48,103,.11);border-bottom:1px solid var(--line)}
+ .nav-links.is-open{display:flex!important}
+ .nav-links a{padding:12px;font-size:13px}
+}
+@media(max-width:830px){.nav-links{top:76px}}
+@media(max-width:1180px){html[data-theme="dark"] .nav-links{background:#0D2644}}
