@@ -1,9 +1,17 @@
-# Wish New Bening — International Website v1.1
+# Wish New Bening — International Website v1.2
 
 **Brand:** Muzike Indonesia  
 **Official domain:** https://wishnewbening.com  
 **Languages:** English (`/en/`) and Bahasa Indonesia (`/id/`)  
 **Tagline:** Clear Mind • Calm Breath • Better Day
+
+## What's new in v1.2
+
+- New bilingual **Mind & Body** section at `/en/#mindbody` and `/id/#mindbody` covering six user-requested topics: Breathwork, Acupuncture, Traditional Herbal, Yoga, Hypnotherapy, and Neuro-Linguistic Programming (NLP).
+- Native, accessible expandable summaries and original responsive 3/2/1-column card layout.
+- Responsible educational content and sources: qualified practitioners for acupuncture; herb–medicine interaction risk; limited health evidence for NLP. Never claim treatment or cure.
+- Breathwork links back to the already working Breath Studio. No new medical, practitioner-booking or personalized treatment function has been added.
+- Existing breathing engine, custom patterns, local progress, language settings, DNS and CNAME are preserved.
 
 ## What's new in v1.1
 
