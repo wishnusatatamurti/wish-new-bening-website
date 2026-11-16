@@ -127,7 +127,7 @@
  }
  const controls={};
  tiles.forEach((tile,i)=>{
-  const name=names[i]; // All four tiles are currently present in the same order.
+  const name=tile.className.split(/\s+/).find(token=>token.startsWith("sound-")&&names.includes(token.slice(6)))?.slice(6)||names[i];
   const old=tile.querySelector("small");if(old)old.textContent=t.preview;
   const actions=document.createElement("div");actions.className="wnb-sound-actions";
   const button=document.createElement("button");button.type="button";button.dataset.sound=name;button.textContent=t.play;button.setAttribute("aria-pressed","false");button.setAttribute("aria-label",t.play+" "+(tile.querySelector("strong")?.textContent||name));
@@ -169,17 +169,24 @@
    const white=Math.random()*2-1;
    if(kind==="ocean"){previous=(previous*.985)+(white*.015);samples[i]=Math.max(-1,Math.min(1,previous*5))}
    else if(kind==="fire"){previous=previous*.78+white*.22;samples[i]=previous}
-   else if(kind==="nature"){previous=previous*.92+white*.08;samples[i]=previous}
+   else if(kind==="nature"){previous=previous*.90+white*.10;samples[i]=Math.max(-1,Math.min(1,previous*.85+white*.24))}
    else samples[i]=white*.75;
   }
   return buffer;
  }
  function chirp(ctx,out){
   const now=ctx.currentTime,osc=ctx.createOscillator(),env=ctx.createGain();
-  osc.type="sine";osc.frequency.setValueAtTime(760+Math.random()*220,now);
-  osc.frequency.exponentialRampToValueAtTime(1250+Math.random()*400,now+.15);
-  env.gain.setValueAtTime(.0001,now);env.gain.exponentialRampToValueAtTime(.025,now+.05);env.gain.exponentialRampToValueAtTime(.0001,now+.22);
-  osc.connect(env);env.connect(out);osc.start(now);osc.stop(now+.24);osc.addEventListener("ended",()=>{osc.disconnect();env.disconnect()},{once:true});
+  // Audible synthetic bird call: avoids near-silent default oscillator volume.
+  const start=960+Math.random()*420;
+  osc.type="sine";osc.frequency.setValueAtTime(start,now);
+  osc.frequency.exponentialRampToValueAtTime(start*(1.22+Math.random()*.16),now+.13);
+  osc.frequency.exponentialRampToValueAtTime(start*(.88+Math.random()*.08),now+.29);
+  env.gain.setValueAtTime(.0001,now);
+  env.gain.exponentialRampToValueAtTime(.11,now+.045);
+  env.gain.exponentialRampToValueAtTime(.048,now+.15);
+  env.gain.exponentialRampToValueAtTime(.0001,now+.32);
+  osc.connect(env);env.connect(out);osc.start(now);osc.stop(now+.33);
+  osc.addEventListener("ended",()=>{osc.disconnect();env.disconnect()},{once:true});
  }
  function crackle(ctx,out){
   const now=ctx.currentTime,osc=ctx.createOscillator(),env=ctx.createGain();
@@ -199,11 +206,13 @@
     master=audio.createGain();master.gain.value=Number(soundSlider?.value||40)/100;master.connect(limiter);
    }
    await audio.resume();
+   // Never display an active Stop state if the browser blocked audio output.
+   if(audio.state!=="running")throw new Error("AudioContext did not start");
    const source=audio.createBufferSource();source.buffer=noiseBuffer(audio,kind);source.loop=true;
    const filter=audio.createBiquadFilter(),gain=audio.createGain();
    if(kind==="rain"){filter.type="highpass";filter.frequency.value=370;gain.gain.value=.24}
    if(kind==="ocean"){filter.type="lowpass";filter.frequency.value=340;gain.gain.value=.24}
-   if(kind==="nature"){filter.type="lowpass";filter.frequency.value=590;gain.gain.value=.23}
+   if(kind==="nature"){filter.type="lowpass";filter.frequency.value=1800;gain.gain.value=.68}
    if(kind==="fire"){filter.type="bandpass";filter.frequency.value=440;filter.Q.value=.35;gain.gain.value=.24}
    source.connect(filter);filter.connect(gain);gain.connect(master);
    const nodes=[source,filter,gain];let lfo=null;const intervals=[];
@@ -211,7 +220,7 @@
     lfo=audio.createOscillator();lfo.frequency.value=.095;
     const depth=audio.createGain();depth.gain.value=.12;lfo.connect(depth);depth.connect(gain.gain);lfo.start();nodes.push(lfo,depth);
    }
-   if(kind==="nature"){chirp(audio,master);intervals.push(setInterval(()=>{if(active?.kind==="nature"&&audio.state==="running")chirp(audio,master)},3100))}
+   if(kind==="nature"){chirp(audio,master);intervals.push(setInterval(()=>{if(active?.kind==="nature"&&audio.state==="running")chirp(audio,master)},2300))}
    if(kind==="fire"){intervals.push(setInterval(()=>{if(active?.kind==="fire"&&audio.state==="running")crackle(audio,master)},420))}
    source.start();
    const timeout=setTimeout(()=>stopSound(),20*60*1000);
