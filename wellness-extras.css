@@ -1,0 +1,73 @@
+/* Wish New Bening v1.5: browser voice guidance, ambient previews and mobile ergonomics */
+.wnb-voice-panel{margin-top:22px;padding:18px;border-radius:17px;border:1px solid rgba(183,222,255,.24);background:rgba(4,38,89,.24);color:#eef7ff}
+.wnb-voice-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.wnb-voice-head strong{font-size:13px;letter-spacing:.02em;color:#fff}
+.wnb-voice-head label{display:inline-flex;align-items:center;gap:8px;font-size:12px;cursor:pointer}
+.wnb-voice-head input{width:18px;height:18px;accent-color:#83c8e4}
+.wnb-voice-info{font-size:11px;line-height:1.6;color:#cae4ff;margin:10px 0}
+.wnb-voice-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin:12px 0}
+.wnb-voice-row select{width:100%;min-width:0;max-width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(205,231,255,.38);background:#f4faff;color:#164a83;font:inherit;font-size:12px}
+.wnb-voice-row button{padding:10px 13px;border:1px solid #80bce9;border-radius:10px;background:rgba(255,255,255,.1);color:#f1faff;font-weight:700;font-size:12px;cursor:pointer}
+.wnb-voice-volume,.wnb-sound-volume{display:flex;align-items:center;gap:12px;font-size:11px;color:#d0e8ff}
+.wnb-voice-volume input,.wnb-sound-volume input{flex:1;min-width:75px;accent-color:#83c8e4;cursor:pointer}
+.wnb-voice-panel [disabled]{cursor:not-allowed;opacity:.5}
+.wnb-voice-panel button:focus-visible,.wnb-voice-panel select:focus-visible,.wnb-sound-actions button:focus-visible,.wnb-sound-master button:focus-visible{outline:3px solid #98ddff;outline-offset:3px}
+.wnb-sound-actions{margin-top:12px;display:flex;justify-content:center}
+.wnb-sound-actions button{width:100%;min-height:42px;border:1px solid rgba(0,86,202,.28);border-radius:11px;background:linear-gradient(120deg,#125db9,#0056ca);color:#fff;font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+.wnb-sound-actions button[aria-pressed=true]{background:#113d7a;color:#fff}
+.wnb-sound-status{display:block;font-size:10px;line-height:1.4;text-align:center;margin-top:7px;color:#3c6389;min-height:16px}
+.wnb-sound-master{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;padding:17px 19px;border-radius:16px;border:1px solid #cce4f7;background:rgba(255,255,255,.77)}
+.wnb-sound-volume{color:#235381;min-width:180px;flex:1}
+.wnb-sound-master button{padding:10px 18px;font-weight:740;border-radius:10px;border:1px solid #74aee0;color:#114c92;background:#e9f5ff;cursor:pointer}
+.wnb-sound-detail{flex-basis:100%;font-size:11px;line-height:1.65;color:#54738f;margin:0}
+.wnb-sound-master [disabled]{opacity:.5;cursor:not-allowed}
+.sounds-grid .sound-tile{height:auto;min-height:267px;padding:12px 10px 14px}
+.sounds-grid .sound-art{min-height:140px}
+.sounds-grid .sound-tile strong{font-size:13px}
+.mobile-session-actions{display:none}
+html[data-theme=dark] .wnb-voice-panel{background:rgba(6,30,67,.72);border-color:#406b93}
+html[data-theme=dark] .wnb-sound-master{background:#15314f;border-color:#355b7f}
+html[data-theme=dark] .wnb-sound-detail,html[data-theme=dark] .wnb-sound-volume{color:#c0dcf4}
+html[data-theme=dark] .wnb-sound-status{color:#bddaf1}
+html[data-theme=dark] .wnb-sound-master button{background:#254c73;border-color:#629acb;color:#ecf7ff}
+html[data-theme=dark] .wnb-sound-actions button{border-color:#5f9dde}
+@media(max-width:1050px){
+ .sounds-grid{gap:30px}
+ .sounds-grid .sound-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sounds-grid .sound-tile{min-height:220px}
+}
+@media(max-width:830px){
+ .studio-panel{display:flex;flex-direction:column}
+ .studio-sidebar{order:1}
+ .studio-stage{order:2;min-height:440px}
+ .sounds-grid{display:grid;grid-template-columns:1fr}
+ .sounds-grid .sound-tiles{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none}
+}
+@media(max-width:640px){
+ .studio-head{margin-bottom:22px}
+ .studio-sidebar{padding:22px 18px}
+ .studio-stage{padding:20px 14px 24px;min-height:410px}
+ .studio-stage .breath-visual{height:280px}
+ .studio-stage .breath-ring{width:min(72vw,260px)}
+ .studio-stage .ring-two{width:min(60vw,220px)}
+ .studio-stage .breath-aura{width:min(68vw,245px)}
+ .studio-stage .breath-core{width:min(52vw,188px);height:min(52vw,188px)}
+ .studio-sidebar .studio-controls{display:none}
+ .mobile-session-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}
+ .mobile-session-actions button{border-radius:11px;border:1px solid #7db1df;background:#ebf8ff;color:#0d468e;min-height:49px;min-width:0;padding:8px;font:inherit;font-size:12px;font-weight:750;touch-action:manipulation}
+ .mobile-session-actions button:first-child{background:#a6dcfa}
+ .mobile-session-actions button[disabled]{opacity:.45;cursor:not-allowed}
+ .mobile-session-actions button:focus-visible{outline:3px solid #83c8e4;outline-offset:2px}
+ .wnb-voice-row{grid-template-columns:minmax(0,1fr) auto}
+ .wnb-voice-panel{padding:16px 13px}
+ .sounds-grid .sound-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sounds-grid .sound-tile{min-height:215px}
+ .sounds-grid .sound-art{min-height:110px}
+ .wnb-sound-master{gap:12px;padding:15px}
+ .wnb-sound-master button{min-height:44px}
+}
+@media(max-width:370px){
+ .wnb-voice-row{grid-template-columns:1fr}
+ .wnb-voice-head{flex-wrap:wrap}
+ .mobile-session-actions button{font-size:11px}
+}

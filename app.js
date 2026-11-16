@@ -48,6 +48,8 @@ function displayHistoryName(name){
 }
 
 const STORAGE = {custom:'wnb_custom_patterns_v1',history:'wnb_web_sessions_v1'};
+// Optional voice/audio consumers subscribe to breathing lifecycle events.
+function emitBreath(type, detail={}){window.dispatchEvent(new CustomEvent('wnb:breath',{detail:{type,...detail}}));}
 const $ = id => document.getElementById(id);
 const select = $('practiceSelect');
 const startButton = $('startButton');
@@ -164,7 +166,7 @@ function startSession(){
   const cycleLength=phaseList.reduce((total,p)=>total+p.duration,0);
   if(cycleLength<=0)return;
   session={pattern,phaseList,cycleLength,elapsed:0,startedAt:performance.now(),paused:false,raf:0,lastPhase:''};
-  setControls();updateSession();toast(`${displayName(pattern)} ${LANG==='id'?msg('started'):'has started.'}`);
+  emitBreath('started',{pattern:pattern.name});setControls();updateSession();toast(`${displayName(pattern)} ${LANG==='id'?msg('started'):'has started.'}`);
 }
 function updateSession(){
   if(!session || session.paused)return;
@@ -184,7 +186,7 @@ function updateSession(){
   phaseText.textContent=LANG==='id'?msg(current.name):current.name;
   phaseSeconds.textContent=String(Math.max(1,Math.ceil(end-cycleTime)));
   phaseHint.textContent=LANG==='id'?msg('hint'+current.name):current.hint;
-  if(s.lastPhase!==current.name){s.lastPhase=current.name;statusText.textContent=LANG==='id'?`${msg(current.name)} ${msg('phasePace')}`:`${current.name.charAt(0)}${current.name.slice(1).toLowerCase()} at your own pace.`;}
+  if(s.lastPhase!==current.name){s.lastPhase=current.name;emitBreath('phase',{phase:current.name,duration:current.duration});statusText.textContent=LANG==='id'?`${msg(current.name)} ${msg('phasePace')}`:`${current.name.charAt(0)}${current.name.slice(1).toLowerCase()} at your own pace.`;}
   $('remainingText').textContent=formatTime(totalSeconds-elapsed);
   $('cycleCounter').textContent=`${LANG==='id'?msg('cycle'):'CYCLE'} ${Math.floor(elapsed/s.cycleLength)+1}`;
   const percent=(elapsed/totalSeconds)*100;
@@ -196,7 +198,7 @@ function togglePause(){
   if(!session)return;
   if(!session.paused){
     session.elapsed=currentElapsed();session.paused=true;cancelAnimationFrame(session.raf);
-    statusText.textContent=LANG==='id'?msg('paused'):'Paused. Take your time.';
+    emitBreath('paused');statusText.textContent=LANG==='id'?msg('paused'):'Paused. Take your time.';
     phaseText.textContent=LANG==='id'?'DIJEDA':'PAUSED';phaseHint.textContent=LANG==='id'?msg('pausedHint'):'Resume whenever you are ready';
   }else{
     session.paused=false;session.startedAt=performance.now();session.lastPhase='';updateSession();
@@ -205,7 +207,7 @@ function togglePause(){
 }
 function endSession(showMessage=true){
   if(!session)return;
-  cancelAnimationFrame(session.raf);session=null;setControls();
+  cancelAnimationFrame(session.raf);session=null;emitBreath('ended');setControls();
   phaseText.textContent=LANG==='id'?msg('ready'):'READY';phaseSeconds.textContent='✦';phaseHint.textContent=LANG==='id'?msg('comfortable'):'Find a comfortable position';
   statusText.textContent=LANG==='id'?msg('gentleStart'):'A gentle moment starts here.';
   $('cycleCounter').textContent=LANG==='id'?msg('readyWhen'):'READY WHEN YOU ARE';
@@ -216,7 +218,7 @@ function endSession(showMessage=true){
 function completeSession(){
   if(!session)return;
   const completed={date:dateKey(new Date()),timestamp:Date.now(),name:session.pattern.name,duration:session.pattern.duration};
-  cancelAnimationFrame(session.raf);session=null;
+  cancelAnimationFrame(session.raf);session=null;emitBreath('completed');
   history.unshift(completed);history=history.slice(0,300);saveArray(STORAGE.history,history);
   renderProgress();setControls();setOrb(.77);
   phaseText.textContent=LANG==='id'?msg('completed'):'COMPLETE';phaseSeconds.textContent='✓';phaseHint.textContent=LANG==='id'?msg('completeHint'):'Thank you for taking this moment';
