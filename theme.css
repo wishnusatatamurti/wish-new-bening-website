@@ -123,3 +123,16 @@ html[data-theme="dark"] .symbol-moon,html[data-theme="dark"] .symbol-reset{color
 }
 @media(max-width:830px){.nav-links{top:76px}}
 @media(max-width:1180px){html[data-theme="dark"] .nav-links{background:#0D2644}}
+
+
+/* Official corporate footer contact + copyright, consistent across all locale routes */
+.footer-contact-detail{display:flex;flex-direction:column;gap:13px;min-width:0}
+.footer-contact-detail p{margin:0;font-size:12px;line-height:1.85;color:#426B95;max-width:750px}
+.footer-contact-detail a{display:block;width:fit-content;color:#0056CA;font-size:13px;font-weight:750;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.footer-contact-detail a:hover{color:#07468E}
+.copyright-line{display:block;margin-top:4px}
+.footer-bottom>span{line-height:1.65}
+html[data-theme="dark"] .footer-contact-detail p{color:#BED5EC}
+html[data-theme="dark"] .footer-contact-detail a{color:#8CCEFF}
+html[data-theme="dark"] .footer-contact-detail a:hover{color:#D7EFFF}
+@media(max-width:560px){.footer-contact{align-items:flex-start;flex-direction:column;gap:10px}.footer-contact-detail{gap:10px}}
