@@ -1,9 +1,20 @@
-# Wish New Bening — International Website v1.3
+# Wish New Bening — International Website v1.5
 
 **Brand:** Muzike Indonesia  
 **Official domain:** https://wishnewbening.com  
 **Languages:** English (`/en/`) and Bahasa Indonesia (`/id/`)  
 **Tagline:** Clear Mind • Calm Breath • Better Day
+
+## What's new in v1.5 — Mobile Breath Studio, Voice Guidance, Calm Sounds previews
+
+- More comfortable mobile Breath Studio controls: large Start / Pause / End buttons near the breathing circle on screens ≤640px; the original desktop controls remain.
+- Optional **Voice Guidance** with browser/device speech synthesis: voice selection when voices are installed, volume, enable/disable and a voice test. Instructions are triggered only when inhaling, holding, exhaling and resting phases change; paused/ended sessions cancel speech.
+- Voice prompts in all **16 UI languages**, but actual installed voices and pronunciation depend on browser and operating system. Some devices may not offer native voices for all languages. No external/cloud TTS service or prerecorded male/female voice is bundled.
+- Interactive **Calm Sounds previews** for Rain, Ocean, Nature, and Fireplace generated locally by Web Audio. They are **synthesized demos, not authentic field recordings** or premium soundscapes. A single sound plays at a time, user controls volume, and audio stops after 20 minutes.
+- New `wellness-extras.js` and `wellness-extras.css` (all 16 language homepages); minimal `wnb:breath` lifecycle event emissions from `app.js`.
+- Existing session logic, preset durations, custom patterns, browser localStorage history keys, preview language SEO flags, CNAME/DNS, theme controls and privacy statement remain unchanged.
+- Performance: no CDN or third-party speech/audio dependencies and no new network requests for sound generation.
+- Test on actual Chrome Android, iOS Safari and desktop browsers before describing voice or background playback as universally supported.
 
 ## What's new in v1.3 (international preview + blue day/night experience)
 
