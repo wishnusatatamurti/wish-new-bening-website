@@ -1,9 +1,20 @@
-# Wish New Bening — International Website v1.2
+# Wish New Bening — International Website v1.3
 
 **Brand:** Muzike Indonesia  
 **Official domain:** https://wishnewbening.com  
 **Languages:** English (`/en/`) and Bahasa Indonesia (`/id/`)  
 **Tagline:** Clear Mind • Calm Breath • Better Day
+
+## What's new in v1.3 (international preview + blue day/night experience)
+
+- Reference-led light sky blue `#83C8E4` → royal deep blue `#0056CA` palette, with deep navy dark mode.
+- Header theme switcher with preference saved as `wnb_theme_v1`; default honors system preference.
+- Native global language chooser offering 16 languages, with first-visit detection/suggestion and persistent `wnb_language_v1`.
+- Reviewed complete English / Indonesian experiences remain at `/en/` and `/id/`.
+- 14 additional language-specific preview routes (`/es/`, `/fr/`, `/de/`, `/pt/`, `/it/`, `/ru/`, `/ar/`, `/hi/`, `/zh/`, `/ja/`, `/ko/`, `/th/`, `/vi/`, `/ms/`). These translate the principal navigation, hero, session controls, phases and progress labels; some detailed sections/journal/legal material remains in English. They are **noindex** until complete editorial and legal review. Do not claim these pages are fully translated yet.
+- Expanded global language selection must not erase the prior `wnb_web_sessions_v1` or `wnb_custom_patterns_v1` keys; no server sync added.
+- Theme implemented in `theme.css` and `theme-init.js`; translations in `locale-runtime.js` and language switching in `language.js`.
+- Existing official domain/CNAME and GitHub Pages publishing settings unchanged.
 
 ## What's new in v1.2
 
