@@ -77,6 +77,10 @@
     const value=original.trim();
     if(!value||value.length>450)return original;
     let target=dictionary.get(value);
+    if (!target) {
+      const practiceLabel = value.match(/^PRACTICE\s+(\d{1,2})$/);
+      if (practiceLabel) target = (dictionary.get("PRACTICE") || "PRACTICE") + " " + practiceLabel[1];
+    }
     if(!target){
       let m=value.match(/^CYCLE\s+(\d+)$/);
       if(m) target=fallback.cycle+" "+m[1];
