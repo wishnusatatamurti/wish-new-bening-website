@@ -56,6 +56,7 @@
  const vEnable=$("voiceEnable"),vSelect=$("voiceSelect"),vTest=$("voiceTest"),vVolume=$("voiceVolume");
  if(vEnable){vEnable.checked=enabled&&supportsSpeech;vEnable.disabled=!supportsSpeech;}
  if(vTest)vTest.disabled=!supportsSpeech;
+ if(vSelect)vSelect.setAttribute("aria-label",t.choose);
  let voices=[],voiceId=store.get("wnb_voice_id_v1","");
  const vol=Number(store.get("wnb_voice_volume_v1","65"));
  if(vVolume)vVolume.value=String(Number.isFinite(vol)?Math.max(0,Math.min(100,vol)):65);
@@ -111,7 +112,7 @@
  const AudioCtx=window.AudioContext||window.webkitAudioContext;
  let audio=null,master=null,active=null;
  const tiles=names.map(name=>document.querySelector(".sound-"+name)).filter(Boolean);
- const volumeValue=Math.max(0,Math.min(100,Number(store.get("wnb_sound_volume_v1","40"))||40));
+ const volumeValue=Math.max(0,Math.min(100,Number.isFinite(Number(store.get("wnb_sound_volume_v1","40")))?Number(store.get("wnb_sound_volume_v1","40")):40));
  const copy=document.querySelector(".sounds-copy");
  let soundSlider=null,soundStop=null;
  if(copy){
@@ -129,7 +130,7 @@
   const name=names[i]; // All four tiles are currently present in the same order.
   const old=tile.querySelector("small");if(old)old.textContent=t.preview;
   const actions=document.createElement("div");actions.className="wnb-sound-actions";
-  const button=document.createElement("button");button.type="button";button.dataset.sound=name;button.textContent=t.play;button.setAttribute("aria-pressed","false");
+  const button=document.createElement("button");button.type="button";button.dataset.sound=name;button.textContent=t.play;button.setAttribute("aria-pressed","false");button.setAttribute("aria-label",t.play+" "+(tile.querySelector("strong")?.textContent||name));
   const status=document.createElement("span");status.className="wnb-sound-status";status.setAttribute("aria-live","polite");status.textContent=t.preview;
   actions.append(button);tile.append(actions,status);
   controls[name]={button,status};
